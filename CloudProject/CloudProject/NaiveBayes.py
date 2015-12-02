@@ -42,14 +42,23 @@ reformattedCrime=crimeData.map(lambda line: [date2dayofweek(line[2].split(' ',1)
 
 #train_set, test_set = reformattedCrime.randomSplit([0.0001, 0.9999])
 
-train_set = reformattedCrime.take(100)
+train_set = reformattedCrime.take(500)
 
 schemaCrime = sqlContext.createDataFrame(train_set, schema)
 schemaCrime.registerTempTable("chicagocrimedata")
 Weekday1 = 'day'
-results=sqlContext.sql("SELECT * FROM chicagocrimedata order by block")
+results=sqlContext.sql("SELECT crimetype,block,count(*) AS count FROM chicagocrimedata group by crimetype,block order by count")
 
-print results.show(200)
+distinctCrimeTypes = sqlContext.sql("SELECT distinct(crimetype) AS crimetypes FROM chicagocrimedata").collect()
+
+#for value in distinctCrimeTypes:
+print len(distinctCrimeTypes)
+
+print distinctCrimeTypes[1][0]
+
+print list(distinctCrimeTypes)
+
+#print results.show(500)
 
 
 
