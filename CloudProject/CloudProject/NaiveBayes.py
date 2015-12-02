@@ -6,6 +6,7 @@ from datetime import date
 from pyspark.sql import SQLContext
 from pyspark.sql.types import *
 from calendar import week
+from chardet.test import count
 
 
 if __name__ == "__main__":
@@ -48,23 +49,95 @@ schemaCrime = sqlContext.createDataFrame(train_set, schema)
 schemaCrime.registerTempTable("chicagocrimedata")
 
 locationVocabulary = sqlContext.sql("SELECT count(distinct(block)) from chicagocrimedata").collect()[0][0]
+timeVocabulary = sqlContext.sql("SELECT count(distinct(timeslot)) from chicagocrimedata").collect()[0][0]
+dayVocabulary = sqlContext.sql("SELECT count(distinct(day)) from chicagocrimedata").collect()[0][0]
 
 
-locationsMatrix=sqlContext.sql("SELECT crimetype,block,count(*) AS count FROM chicagocrimedata group by crimetype,block order by count desc")
-timeMatrix=sqlContext.sql("SELECT crimetype,timeslot,count(*) AS count FROM chicagocrimedata group by crimetype,timeslot order by count desc")
-dayMatrix=sqlContext.sql("SELECT crimetype,day,count(*) AS count FROM chicagocrimedata group by crimetype,day order by count desc")
+locationsMatrix=sqlContext.sql("SELECT crimetype,block,count(*) AS countPerBlock FROM chicagocrimedata group by crimetype,block order by countPerBlock desc")
+timeMatrix=sqlContext.sql("SELECT crimetype,timeslot,count(*) AS countPerTime FROM chicagocrimedata group by crimetype,timeslot order by countPerTime desc")
+dayMatrix=sqlContext.sql("SELECT crimetype,day,count(*) AS countPerDay FROM chicagocrimedata group by crimetype,day order by countPerDay desc")
 
+
+
+
+#Extract all classes. Here, distinct crime types 
 CrimeTypes = sqlContext.sql("SELECT distinct(crimetype) AS crimetypes FROM chicagocrimedata").collect()
-
-#print CrimeTypes
-
 
 allCrimeTypes = list()
 for index in range(len(CrimeTypes)):
     allCrimeTypes.append(CrimeTypes[index][0])
+    
+#Extracting statistics of crimes  
+crimeCounts=sqlContext.sql("SELECT crimetype,count(*) as crimeCount FROM chicagocrimedata GROUP BY crimetype").collect()
+countByCrimeType = {}
+for index in range(len(crimeCounts)):
+    countByCrimeType[crimeCounts[index][0]] = crimeCounts[index][1]
+
+print list(countByCrimeType)
+#Registering DataFrames as a table for program efficiency.
+locationsMatrix.registerTempTable("LocationMatrix")
+timeMatrix.registerTempTable("TimeMatrix")
+dayMatrix.registerTempTable("DayMatrix")
+#crimeCounts.registerTempTable("CrimeCounts")
 
 
-print locationVocabulary
+
+
+
+'''
+#sqlContext.sql("UPDATE TABLE LocationMatrix SET block = 'N STATE ST' WHERE crimetype='THEFT and count=4")
+#testing = sqlContext.sql("SELECT block, count(distinct(crimetype)) AS count FROM LocationMatrix group by crimetype,block order by count desc")
+
+#print testing.show(100)
+
+userlocation = "N STATE ST"
+usertimeslot = intern('3')
+userday = "Friday"
+
+Loc_nOfCrime = {}
+time_nOfCrime = {}
+day_nOfCrime = {}
+
+
+
+for index in range(len(allCrimeTypes)):
+    temp = sqlContext.sql("SELECT countPerBlock FROM LocationMatrix WHERE block='"+ userlocation+ "' and crimetype='"+allCrimeTypes[index]+"'").collect()
+    if (not temp):
+        Loc_nOfCrime[allCrimeTypes[index]] = 0
+    else:
+        Loc_nOfCrime[allCrimeTypes[index]] = temp[0][0]
+ 
+#Loc_nOfCrime[allCrimeTypes[index]] = temp[0].Pcount
+
+for index in range(len(allCrimeTypes)):
+    temp = sqlContext.sql("SELECT countPerTime FROM TimeMatrix WHERE timeslot="+ usertimeslot+ " and crimetype='"+allCrimeTypes[index]+"'").collect()
+    if (not temp):
+        time_nOfCrime[allCrimeTypes[index]] = 0
+    else:
+        time_nOfCrime[allCrimeTypes[index]] = temp[0][0]
+        
+        
+for index in range(len(allCrimeTypes)):
+    temp = sqlContext.sql("SELECT countPerDay FROM DayMatrix WHERE day='"+ userday+ "' and crimetype='"+allCrimeTypes[index]+"'").collect()
+    if (not temp):
+        day_nOfCrime[allCrimeTypes[index]] = 0
+    else:
+        day_nOfCrime[allCrimeTypes[index]] = temp[0][0]
+        
+
+print Loc_nOfCrime.items()
+print time_nOfCrime.items()
+print day_nOfCrime.items()
+
+
+'''
+#print testing.show(100)
+#print timeMatrix.filter(timeMatrix.crimetype == 'THEFT' & timeMatrix.timeslot==3).show(100)
+
+
+
+
+#print locationVocabulary
 #print locationsMatrix.show(100)
 
 
