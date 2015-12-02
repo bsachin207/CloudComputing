@@ -46,19 +46,26 @@ train_set = reformattedCrime.take(500)
 
 schemaCrime = sqlContext.createDataFrame(train_set, schema)
 schemaCrime.registerTempTable("chicagocrimedata")
-Weekday1 = 'day'
-results=sqlContext.sql("SELECT crimetype,block,count(*) AS count FROM chicagocrimedata group by crimetype,block order by count")
 
-distinctCrimeTypes = sqlContext.sql("SELECT distinct(crimetype) AS crimetypes FROM chicagocrimedata").collect()
+locationVocabulary = sqlContext.sql("SELECT count(distinct(block)) from chicagocrimedata").collect()[0][0]
 
-#for value in distinctCrimeTypes:
-print len(distinctCrimeTypes)
 
-print distinctCrimeTypes[1][0]
+locationsMatrix=sqlContext.sql("SELECT crimetype,block,count(*) AS count FROM chicagocrimedata group by crimetype,block order by count desc")
+timeMatrix=sqlContext.sql("SELECT crimetype,timeslot,count(*) AS count FROM chicagocrimedata group by crimetype,timeslot order by count desc")
+dayMatrix=sqlContext.sql("SELECT crimetype,day,count(*) AS count FROM chicagocrimedata group by crimetype,day order by count desc")
 
-print list(distinctCrimeTypes)
+CrimeTypes = sqlContext.sql("SELECT distinct(crimetype) AS crimetypes FROM chicagocrimedata").collect()
 
-#print results.show(500)
+#print CrimeTypes
+
+
+allCrimeTypes = list()
+for index in range(len(CrimeTypes)):
+    allCrimeTypes.append(CrimeTypes[index][0])
+
+
+print locationVocabulary
+#print locationsMatrix.show(100)
 
 
 
