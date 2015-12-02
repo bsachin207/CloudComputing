@@ -42,10 +42,7 @@ reformattedCrime=crimeData.map(lambda line: [date2dayofweek(line[2].split(' ',1)
 
 #train_set, test_set = reformattedCrime.randomSplit([0.0001, 0.9999])
 
-
-
-
-train_set = reformattedCrime.take(200)
+train_set = reformattedCrime.take(100)
 
 schemaCrime = sqlContext.createDataFrame(train_set, schema)
 schemaCrime.registerTempTable("chicagocrimedata")
@@ -54,7 +51,6 @@ results=sqlContext.sql("SELECT * FROM chicagocrimedata order by block")
 
 print results.show(200)
 
-#print"reformatted crime",results.take(20)
 
 
 sc.stop()    
