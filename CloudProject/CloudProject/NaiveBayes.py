@@ -71,9 +71,11 @@ for index in range(len(CrimeTypes)):
 crimeCounts=sqlContext.sql("SELECT crimetype,count(*) as crimeCount FROM chicagocrimedata GROUP BY crimetype").collect()
 countByCrimeType = {}
 for index in range(len(crimeCounts)):
-    countByCrimeType[crimeCounts[index][0]] = crimeCounts[index][1]
+    countByCrimeType[crimeCounts[index].crimetype] = crimeCounts[index].crimeCount
 
-print list(countByCrimeType)
+print countByCrimeType.items()
+           
+'''
 #Registering DataFrames as a table for program efficiency.
 locationsMatrix.registerTempTable("LocationMatrix")
 timeMatrix.registerTempTable("TimeMatrix")
@@ -84,7 +86,7 @@ dayMatrix.registerTempTable("DayMatrix")
 
 
 
-'''
+
 #sqlContext.sql("UPDATE TABLE LocationMatrix SET block = 'N STATE ST' WHERE crimetype='THEFT and count=4")
 #testing = sqlContext.sql("SELECT block, count(distinct(crimetype)) AS count FROM LocationMatrix group by crimetype,block order by count desc")
 
@@ -130,7 +132,6 @@ print time_nOfCrime.items()
 print day_nOfCrime.items()
 
 
-'''
 #print testing.show(100)
 #print timeMatrix.filter(timeMatrix.crimetype == 'THEFT' & timeMatrix.timeslot==3).show(100)
 
@@ -140,6 +141,6 @@ print day_nOfCrime.items()
 #print locationVocabulary
 #print locationsMatrix.show(100)
 
-
+'''
 
 sc.stop()    
