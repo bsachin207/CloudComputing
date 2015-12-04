@@ -1,0 +1,100 @@
++--------------------+--------+------------+
+|           crimetype|timeslot|countPerTime|
++--------------------+--------+------------+
+|               THEFT|       6|          31|
+|             BATTERY|       7|          21|
+|               THEFT|       7|          21|
+|               THEFT|       5|          19|
+|               THEFT|       8|          18|
+|             BATTERY|       6|          17|
+|     CRIMINAL DAMAGE|       8|          17|
+|     CRIMINAL DAMAGE|       7|          15|
+|             BATTERY|       8|          13|
+|           NARCOTICS|       4|          12|
+|               THEFT|       4|          12|
+|     CRIMINAL DAMAGE|       6|          11|
+|       OTHER OFFENSE|       5|          11|
+|     CRIMINAL DAMAGE|       5|          10|
+|               THEFT|       3|          10|
+|             BATTERY|       5|           9|
+|             ASSAULT|       7|           9|
+|             ROBBERY|       7|           8|
+|            BURGLARY|       4|           8|
+|            BURGLARY|       7|           8|
+|             BATTERY|       4|           8|
+|             ASSAULT|       5|           7|
+|             BATTERY|       1|           7|
+|             BATTERY|       2|           7|
+|           NARCOTICS|       8|           7|
+|           NARCOTICS|       6|           6|
+| MOTOR VEHICLE THEFT|       5|           6|
+|           NARCOTICS|       5|           6|
+|           NARCOTICS|       7|           6|
+|     CRIMINAL DAMAGE|       4|           6|
+|            BURGLARY|       5|           6|
+|            BURGLARY|       6|           6|
+|  DECEPTIVE PRACTICE|       5|           6|
+|             BATTERY|       3|           6|
+|             ROBBERY|       5|           5|
+|     CRIMINAL DAMAGE|       2|           5|
+|       OTHER OFFENSE|       4|           5|
+|       OTHER OFFENSE|       7|           5|
+| MOTOR VEHICLE THEFT|       3|           4|
+| MOTOR VEHICLE THEFT|       7|           4|
+|       OTHER OFFENSE|       3|           4|
+|             ASSAULT|       3|           4|
+|       OTHER OFFENSE|       6|           4|
+|             ASSAULT|       4|           4|
+|   WEAPONS VIOLATION|       5|           3|
+|   WEAPONS VIOLATION|       6|           3|
+| MOTOR VEHICLE THEFT|       8|           3|
+|   CRIMINAL TRESPASS|       7|           3|
+|            BURGLARY|       8|           3|
+|  DECEPTIVE PRACTICE|       2|           3|
+|  DECEPTIVE PRACTICE|       6|           3|
+|             ROBBERY|       4|           3|
+|     CRIMINAL DAMAGE|       1|           3|
+|     CRIMINAL DAMAGE|       3|           3|
+|            BURGLARY|       1|           3|
+|             ASSAULT|       8|           3|
+|   WEAPONS VIOLATION|       7|           2|
+|   WEAPONS VIOLATION|       4|           2|
+|             ROBBERY|       2|           2|
+|             ROBBERY|       8|           2|
+|INTERFERENCE WITH...|       8|           2|
+| MOTOR VEHICLE THEFT|       6|           2|
+|   CRIMINAL TRESPASS|       8|           2|
+|  DECEPTIVE PRACTICE|       4|           2|
+|       OTHER OFFENSE|       8|           2|
+|OFFENSE INVOLVING...|       7|           2|
+|  DECEPTIVE PRACTICE|       3|           2|
+|   WEAPONS VIOLATION|       3|           1|
+|   WEAPONS VIOLATION|       8|           1|
+|           NARCOTICS|       1|           1|
+| MOTOR VEHICLE THEFT|       1|           1|
+|           NARCOTICS|       2|           1|
+|PUBLIC PEACE VIOL...|       8|           1|
+| CRIM SEXUAL ASSAULT|       4|           1|
+|               THEFT|       2|           1|
+|   CRIMINAL TRESPASS|       2|           1|
+|       OTHER OFFENSE|       2|           1|
+| MOTOR VEHICLE THEFT|       4|           1|
+|OFFENSE INVOLVING...|       6|           1|
+|             ROBBERY|       3|           1|
+| CRIM SEXUAL ASSAULT|       8|           1|
+|               THEFT|       1|           1|
+|   CRIMINAL TRESPASS|       3|           1|
+|   CRIMINAL TRESPASS|       4|           1|
+|            BURGLARY|       3|           1|
+|  DECEPTIVE PRACTICE|       7|           1|
+|             ASSAULT|       1|           1|
+|PUBLIC PEACE VIOL...|       3|           1|
+|            HOMICIDE|       1|           1|
+|             ROBBERY|       6|           1|
+|    PUBLIC INDECENCY|       8|           1|
+| CRIM SEXUAL ASSAULT|       5|           1|
+|   CRIMINAL TRESPASS|       5|           1|
+|               ARSON|       7|           1|
+|             ASSAULT|       6|           1|
++--------------------+--------+------------+
+

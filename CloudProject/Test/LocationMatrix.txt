@@ -1,0 +1,445 @@
++--------------------+--------------------+-------------+
+|           crimetype|               block|countPerBlock|
++--------------------+--------------------+-------------+
+|               THEFT|         W NORTH AVE|            6|
+|             BATTERY|        S WABASH AVE|            4|
+|               THEFT|          N STATE ST|            4|
+|               THEFT|        N ELSTON AVE|            3|
+|             BATTERY|        S VERNON AVE|            3|
+|             BATTERY|    S WINCHESTER AVE|            3|
+|               THEFT|       S ASHLAND AVE|            3|
+|               THEFT|      W WEST END AVE|            3|
+|           NARCOTICS|        W MADISON ST|            3|
+|               THEFT|          S STATE ST|            3|
+|             BATTERY|         S COLES AVE|            3|
+|               THEFT|        S CICERO AVE|            3|
+|     CRIMINAL DAMAGE|         N SAYRE AVE|            3|
+|               THEFT|      W SCHUBERT AVE|            2|
+|               THEFT|           E 75TH ST|            2|
+|               THEFT|      W WABANSIA AVE|            2|
+|     CRIMINAL DAMAGE|         N LAMON AVE|            2|
+|     CRIMINAL DAMAGE|         S COLES AVE|            2|
+|               THEFT|        S PULASKI RD|            2|
+|             ROBBERY|          N STATE ST|            2|
+|               THEFT|        N BERNARD ST|            2|
+|     CRIMINAL DAMAGE|       S EMERALD AVE|            2|
+|     CRIMINAL DAMAGE|          S STATE ST|            2|
+|             BATTERY|     W CONGRESS PKWY|            2|
+| MOTOR VEHICLE THEFT|     W GARFIELD BLVD|            2|
+|               THEFT|        S PAULINA ST|            2|
+|             BATTERY|        S KARLOV AVE|            2|
+|       OTHER OFFENSE|       N WESTERN AVE|            2|
+|             BATTERY|           W 14TH ST|            2|
+|     CRIMINAL DAMAGE|           W 76TH ST|            2|
+|             BATTERY|        N WABASH AVE|            2|
+|     CRIMINAL DAMAGE|       S INDIANA AVE|            2|
+|               THEFT|     N MILWAUKEE AVE|            2|
+|           NARCOTICS|         S COLES AVE|            2|
+|             BATTERY|      S MICHIGAN AVE|            2|
+|     CRIMINAL DAMAGE|       N ROCKWELL ST|            2|
+|           NARCOTICS|       W FLOURNOY ST|            2|
+|     CRIMINAL DAMAGE|            E OAK ST|            2|
+|             BATTERY|       S PRAIRIE AVE|            2|
+|               THEFT|       S ABERDEEN ST|            2|
+|               THEFT|       N LINCOLN AVE|            2|
+| MOTOR VEHICLE THEFT|          S LYON AVE|            1|
+|           NARCOTICS|      W ARMITAGE AVE|            1|
+|               THEFT|         S MORGAN ST|            1|
+|   CRIMINAL TRESPASS|           E 79TH ST|            1|
+|               THEFT|         S BISHOP ST|            1|
+|           NARCOTICS|         N MOZART ST|            1|
+|               THEFT|         W GEORGE ST|            1|
+|             ROBBERY|      S ST LOUIS AVE|            1|
+|             ASSAULT|        S BURLEY AVE|            1|
+|               THEFT|  W BELLE PLAINE AVE|            1|
+|               THEFT|         S ELLIS AVE|            1|
+|             BATTERY|       S ABERDEEN ST|            1|
+|            BURGLARY|        N HARLEM AVE|            1|
+|     CRIMINAL DAMAGE| S SOUTH CHICAGO AVE|            1|
+|             ASSAULT|         N WACKER DR|            1|
+|PUBLIC PEACE VIOL...|          S AVENUE C|            1|
+|               THEFT|    S MARSHFIELD AVE|            1|
+|             ROBBERY|           W 59TH ST|            1|
+|           NARCOTICS|       W GUNNISON ST|            1|
+|     CRIMINAL DAMAGE|    S SACRAMENTO AVE|            1|
+|     CRIMINAL DAMAGE|           E 31ST ST|            1|
+|            BURGLARY|      N LAWNDALE AVE|            1|
+|            BURGLARY|         W NORTH AVE|            1|
+|               THEFT|           W POLK ST|            1|
+|               THEFT|      W ROOSEVELT RD|            1|
+|     CRIMINAL DAMAGE|       S PARNELL AVE|            1|
+|             BATTERY|    W IRVING PARK RD|            1|
+|             BATTERY|           W ERIE ST|            1|
+|           NARCOTICS|        W HUBBARD ST|            1|
+|       OTHER OFFENSE|         W PALMER ST|            1|
+|     CRIMINAL DAMAGE|          E 124TH PL|            1|
+|             ASSAULT|       N LARAMIE AVE|            1|
+| CRIM SEXUAL ASSAULT|     S MAPLEWOOD AVE|            1|
+|  DECEPTIVE PRACTICE|     W GARFIELD BLVD|            1|
+|               THEFT|         S KOLIN AVE|            1|
+|       OTHER OFFENSE|       S CREGIER AVE|            1|
+|           NARCOTICS|    S SOUTH SHORE DR|            1|
+|             BATTERY|         W KINZIE ST|            1|
+|     CRIMINAL DAMAGE|        N WABASH AVE|            1|
+|       OTHER OFFENSE|     S SPAULDING AVE|            1|
+|     CRIMINAL DAMAGE|      N MICHIGAN AVE|            1|
+|               THEFT|           E 67TH ST|            1|
+|   WEAPONS VIOLATION|       W BELMONT AVE|            1|
+|             ASSAULT|S DR MARTIN LUTHE...|            1|
+|               THEFT|    N LEAMINGTON AVE|            1|
+|               THEFT|          E HURON ST|            1|
+|             ASSAULT|         W NORTH AVE|            1|
+|               THEFT|          E ADAMS ST|            1|
+|               ARSON|      S MICHIGAN AVE|            1|
+|            BURGLARY|        W LOGAN BLVD|            1|
+|             ASSAULT|        N PULASKI RD|            1|
+|             ASSAULT|         S PERRY AVE|            1|
+|             ASSAULT|        W JARVIS AVE|            1|
+|     CRIMINAL DAMAGE|      S EAST END AVE|            1|
+|           NARCOTICS|           W OHIO ST|            1|
+|             ROBBERY|        N PAULINA ST|            1|
+|             BATTERY|      S ST LOUIS AVE|            1|
+|  DECEPTIVE PRACTICE|         N LEROY AVE|            1|
+|             BATTERY|         W MONROE ST|            1|
+| MOTOR VEHICLE THEFT|       S WESTERN AVE|            1|
+| MOTOR VEHICLE THEFT|          N CLARK ST|            1|
+|             BATTERY|      S RIDGEWAY AVE|            1|
+|               THEFT|       W CHICAGO AVE|            1|
+|           NARCOTICS|        N PAULINA ST|            1|
+|             BATTERY|           E 68TH ST|            1|
+|           NARCOTICS|         W QUINCY ST|            1|
+|   WEAPONS VIOLATION|          S GREEN ST|            1|
+|            BURGLARY|         S ESSEX AVE|            1|
+|     CRIMINAL DAMAGE|       N KENMORE AVE|            1|
+|               THEFT|      W JACKSON BLVD|            1|
+|       OTHER OFFENSE|          E 103RD ST|            1|
+|             ROBBERY|      S MICHIGAN AVE|            1|
+|       OTHER OFFENSE|           E 80TH ST|            1|
+|           NARCOTICS|     S CHAMPLAIN AVE|            1|
+|            HOMICIDE|         S MORGAN ST|            1|
+|               THEFT|         W HOWARD ST|            1|
+|             ASSAULT|        N TALMAN AVE|            1|
+| CRIM SEXUAL ASSAULT|       S ABERDEEN ST|            1|
+|   CRIMINAL TRESPASS|       S ASHLAND AVE|            1|
+|             BATTERY|       S LANGLEY AVE|            1|
+|               THEFT|         S DAMEN AVE|            1|
+|             ASSAULT|          W 103RD ST|            1|
+|     CRIMINAL DAMAGE|           W 32ND ST|            1|
+|             BATTERY|      S EAST END AVE|            1|
+|             BATTERY|          N CLARK ST|            1|
+|   WEAPONS VIOLATION|         S BISHOP ST|            1|
+|               THEFT|           W 48TH ST|            1|
+|             ROBBERY|        W ARCHER AVE|            1|
+|             ROBBERY|           W LAKE ST|            1|
+|               THEFT|  N CENTRAL PARK AVE|            1|
+|       OTHER OFFENSE|      W JACKSON BLVD|            1|
+|               THEFT|         N DAMEN AVE|            1|
+|             BATTERY|           E 67TH ST|            1|
+|               THEFT|       S SANGAMON ST|            1|
+| MOTOR VEHICLE THEFT|      N ELIZABETH ST|            1|
+|             ASSAULT|     S LAFAYETTE AVE|            1|
+|             BATTERY|      N OAK PARK AVE|            1|
+|            BURGLARY|           W 15TH ST|            1|
+|       OTHER OFFENSE|         S DAMEN AVE|            1|
+|               THEFT|        S RACINE AVE|            1|
+|               THEFT|          S CANAL ST|            1|
+|             BATTERY|S DR MARTIN LUTHE...|            1|
+|             BATTERY|          S STATE ST|            1|
+|     CRIMINAL DAMAGE|   S ST LAWRENCE AVE|            1|
+|             BATTERY|       N SHERIDAN RD|            1|
+|       OTHER OFFENSE|      S NORMANDY AVE|            1|
+|   WEAPONS VIOLATION|       W DIVISION ST|            1|
+|           NARCOTICS|        S ALBANY AVE|            1|
+|             BATTERY|           W 13TH PL|            1|
+|             ASSAULT|           W 79TH ST|            1|
+|             BATTERY|         W GRAND AVE|            1|
+|             ASSAULT|      N RIDGEWAY AVE|            1|
+|           NARCOTICS|         N LOREL AVE|            1|
+|             ROBBERY|        N AUSTIN AVE|            1|
+|     CRIMINAL DAMAGE|     N MAPLEWOOD AVE|            1|
+|               THEFT|   W WASHINGTON BLVD|            1|
+|            BURGLARY|    N CHRISTIANA AVE|            1|
+|           NARCOTICS|      S TORRENCE AVE|            1|
+|             ASSAULT|         S PEORIA ST|            1|
+|       OTHER OFFENSE|      S MARYLAND AVE|            1|
+|       OTHER OFFENSE|         W NELSON ST|            1|
+|INTERFERENCE WITH...|         S BISHOP ST|            1|
+|     CRIMINAL DAMAGE|  N NARRAGANSETT AVE|            1|
+|             BATTERY|          S LOWE AVE|            1|
+|  DECEPTIVE PRACTICE|          S CANAL ST|            1|
+| MOTOR VEHICLE THEFT|      N ARTESIAN AVE|            1|
+|             BATTERY|       S LOOMIS BLVD|            1|
+|            BURGLARY|        S LUELLA AVE|            1|
+|             BATTERY|        N KEDZIE AVE|            1|
+|             ASSAULT|        N KOLMAR AVE|            1|
+|     CRIMINAL DAMAGE|        N KOLMAR AVE|            1|
+|       OTHER OFFENSE|      N MICHIGAN AVE|            1|
+|OFFENSE INVOLVING...|      N MAYFIELD AVE|            1|
+|           NARCOTICS|        S PULASKI RD|            1|
+|             BATTERY|       N LARAMIE AVE|            1|
+|               THEFT|       N LARRABEE ST|            1|
+| MOTOR VEHICLE THEFT|     S SPAULDING AVE|            1|
+|           NARCOTICS|        N PULASKI RD|            1|
+|       OTHER OFFENSE|          S LOWE AVE|            1|
+|            BURGLARY|           E 64TH ST|            1|
+|       OTHER OFFENSE|        S RHODES AVE|            1|
+|               THEFT|     S BALTIMORE AVE|            1|
+|             ASSAULT|       N HARDING AVE|            1|
+| CRIM SEXUAL ASSAULT|      N MICHIGAN AVE|            1|
+|               THEFT|  S STONY ISLAND AVE|            1|
+|             BATTERY|           W 71ST ST|            1|
+|     CRIMINAL DAMAGE|      N RIDGEWAY AVE|            1|
+| MOTOR VEHICLE THEFT|         N AVERS AVE|            1|
+|  DECEPTIVE PRACTICE|         N WAYNE AVE|            1|
+|            BURGLARY|       N MONITOR AVE|            1|
+|   CRIMINAL TRESPASS|       N KOSTNER AVE|            1|
+|           NARCOTICS|           W 87TH ST|            1|
+|   WEAPONS VIOLATION|       S PRAIRIE AVE|            1|
+|             BATTERY|          W 111TH PL|            1|
+|     CRIMINAL DAMAGE|           W 66TH PL|            1|
+|             ASSAULT|        S ARCHER AVE|            1|
+|OFFENSE INVOLVING...|     W GRANVILLE AVE|            1|
+|       OTHER OFFENSE|    W IRVING PARK RD|            1|
+|           NARCOTICS|         W CERMAK RD|            1|
+|            BURGLARY|     N FAIRFIELD AVE|            1|
+|     CRIMINAL DAMAGE|         W WILCOX ST|            1|
+|       OTHER OFFENSE|       S RICHMOND ST|            1|
+|     CRIMINAL DAMAGE|       S WESTERN AVE|            1|
+| MOTOR VEHICLE THEFT|    N SACRAMENTO AVE|            1|
+|             BATTERY|        S NORMAL AVE|            1|
+|             BATTERY|     N FRANCISCO AVE|            1|
+|             BATTERY|      N LAWNDALE AVE|            1|
+|               THEFT|          N CLARK ST|            1|
+|           NARCOTICS|      S MANISTEE AVE|            1|
+|       OTHER OFFENSE|           W 32ND ST|            1|
+|             ROBBERY|          S LONG AVE|            1|
+|       OTHER OFFENSE|         W MONROE ST|            1|
+|           NARCOTICS|  W BLOOMINGDALE AVE|            1|
+|             ROBBERY|     S EGGLESTON AVE|            1|
+|     CRIMINAL DAMAGE|       S BENNETT AVE|            1|
+|               THEFT|           W IOWA ST|            1|
+|               THEFT|     S VINCENNES AVE|            1|
+|       OTHER OFFENSE|     S WASHTENAW AVE|            1|
+|               THEFT|       W BELMONT AVE|            1|
+|  DECEPTIVE PRACTICE|      W WINNEMAC AVE|            1|
+|       OTHER OFFENSE|           E 62ND ST|            1|
+|             BATTERY|      N TRUMBULL AVE|            1|
+|       OTHER OFFENSE|         W ARGYLE ST|            1|
+|               THEFT|          E CEDAR ST|            1|
+|             BATTERY|       W PERSHING RD|            1|
+|             BATTERY|           W 35TH ST|            1|
+| MOTOR VEHICLE THEFT|            E 8TH ST|            1|
+|             BATTERY|         N OSAGE AVE|            1|
+|  DECEPTIVE PRACTICE|      W WEST END AVE|            1|
+|               THEFT|       N ASHLAND AVE|            1|
+|           NARCOTICS|          W HURON ST|            1|
+|               THEFT|      W DIVERSEY AVE|            1|
+| MOTOR VEHICLE THEFT|       S PRAIRIE AVE|            1|
+|     CRIMINAL DAMAGE|          E 117TH ST|            1|
+|     CRIMINAL DAMAGE|           W 85TH ST|            1|
+|             BATTERY|            S ADA ST|            1|
+|     CRIMINAL DAMAGE|W LITHUANIAN PLAZ...|            1|
+|             ROBBERY|        S WABASH AVE|            1|
+|       OTHER OFFENSE|      N CLYBOURN AVE|            1|
+|            BURGLARY|       N KEDVALE AVE|            1|
+|               THEFT|      E JACKSON BLVD|            1|
+|               THEFT|        S KEDZIE AVE|            1|
+|               THEFT|           W 47TH ST|            1|
+|               THEFT|         W GRAND AVE|            1|
+|     CRIMINAL DAMAGE|         S KOLIN AVE|            1|
+|             ROBBERY|      W PETERSON AVE|            1|
+|               THEFT|       S SAGINAW AVE|            1|
+|     CRIMINAL DAMAGE|        N PULASKI RD|            1|
+|           NARCOTICS|           W 51ST ST|            1|
+|            BURGLARY|        W CULLOM AVE|            1|
+|     CRIMINAL DAMAGE|     W PATTERSON AVE|            1|
+|               THEFT|        N FREMONT ST|            1|
+|               THEFT|        N KEDZIE AVE|            1|
+|     CRIMINAL DAMAGE|    S CALIFORNIA AVE|            1|
+|             BATTERY|     S LAFAYETTE AVE|            1|
+|            BURGLARY|    N MONTICELLO AVE|            1|
+|             BATTERY|     S WENTWORTH AVE|            1|
+|     CRIMINAL DAMAGE|          E 134TH ST|            1|
+|               THEFT|      S TORRENCE AVE|            1|
+|             BATTERY|          E 131ST ST|            1|
+|             BATTERY|      N MICHIGAN AVE|            1|
+|             ROBBERY|           E 95TH ST|            1|
+|     CRIMINAL DAMAGE|       W JUNEWAY TER|            1|
+|               THEFT|           W 64TH ST|            1|
+|  DECEPTIVE PRACTICE|       N LINCOLN AVE|            1|
+|               THEFT|         S WACKER DR|            1|
+|             BATTERY|        N MENARD AVE|            1|
+|             BATTERY|         S HONORE ST|            1|
+|             BATTERY|       S SANGAMON ST|            1|
+|PUBLIC PEACE VIOL...|          S STATE ST|            1|
+|INTERFERENCE WITH...|      W ARMITAGE AVE|            1|
+|               THEFT|       W DIVISION ST|            1|
+|            BURGLARY|       N NEWGARD AVE|            1|
+|           NARCOTICS|           W IOWA ST|            1|
+|     CRIMINAL DAMAGE|       S ASHLAND AVE|            1|
+|           NARCOTICS|          N LONG AVE|            1|
+|            BURGLARY|        W ADDISON ST|            1|
+|  DECEPTIVE PRACTICE|         N LOREL AVE|            1|
+|     CRIMINAL DAMAGE|     S WENTWORTH AVE|            1|
+|           NARCOTICS|         W MONROE ST|            1|
+|   WEAPONS VIOLATION|       W JONQUIL TER|            1|
+|           NARCOTICS|     W CONGRESS PKWY|            1|
+|           NARCOTICS|         W OGDEN AVE|            1|
+|               THEFT|          W 111TH ST|            1|
+|             BATTERY|          N BROADWAY|            1|
+|            BURGLARY|       S BRANDON AVE|            1|
+|             ROBBERY|       S LANGLEY AVE|            1|
+|               THEFT|           W 87TH ST|            1|
+|  DECEPTIVE PRACTICE|          N STATE ST|            1|
+|               THEFT|     W PENSACOLA AVE|            1|
+|             ASSAULT| S COTTAGE GROVE AVE|            1|
+|     CRIMINAL DAMAGE|          W 124TH ST|            1|
+|               THEFT|      N LAWNDALE AVE|            1|
+|     CRIMINAL DAMAGE|       S WALDEN PKWY|            1|
+|            BURGLARY|      S MICHIGAN AVE|            1|
+|             BATTERY|            S MAY ST|            1|
+|             BATTERY|           W 53RD PL|            1|
+|            BURGLARY|   S ST LAWRENCE AVE|            1|
+|   CRIMINAL TRESPASS|       S DEARBORN ST|            1|
+|             BATTERY|        S ARCHER AVE|            1|
+|       OTHER OFFENSE| S COTTAGE GROVE AVE|            1|
+|       OTHER OFFENSE|        S NORMAL AVE|            1|
+| MOTOR VEHICLE THEFT|           W 59TH ST|            1|
+|  DECEPTIVE PRACTICE|          E ADAMS ST|            1|
+|             BATTERY|      W VAN BUREN ST|            1|
+|     CRIMINAL DAMAGE|        W CRYSTAL ST|            1|
+|    PUBLIC INDECENCY|           E 99TH ST|            1|
+| MOTOR VEHICLE THEFT|      W WEST END AVE|            1|
+|             ASSAULT|           E 67TH PL|            1|
+|             BATTERY|       W CARROLL AVE|            1|
+|             ASSAULT|   S SPRINGFIELD AVE|            1|
+|   WEAPONS VIOLATION|           W 21ST ST|            1|
+|             ASSAULT|           E 65TH ST|            1|
+|             BATTERY|     S FRANCISCO AVE|            1|
+|             ASSAULT|          W 115TH ST|            1|
+|   WEAPONS VIOLATION|          W 123RD ST|            1|
+|           NARCOTICS|      S CARPENTER ST|            1|
+|     CRIMINAL DAMAGE|       S CORNELL AVE|            1|
+|     CRIMINAL DAMAGE|           E 33RD ST|            1|
+|             BATTERY|    S COMMERCIAL AVE|            1|
+|             ASSAULT|       W CHICAGO AVE|            1|
+|               THEFT|       S PRAIRIE AVE|            1|
+|     CRIMINAL DAMAGE|  S STONY ISLAND AVE|            1|
+|               THEFT|     S LAFAYETTE AVE|            1|
+|               THEFT|        N HALSTED ST|            1|
+|               THEFT|           W 79TH ST|            1|
+|   CRIMINAL TRESPASS|        S RACINE AVE|            1|
+|       OTHER OFFENSE|S DR MARTIN LUTHE...|            1|
+|            BURGLARY|       S EMERALD AVE|            1|
+|   CRIMINAL TRESPASS|        W MADISON ST|            1|
+|            BURGLARY|           E 59TH ST|            1|
+|             ASSAULT|      S KINGSTON AVE|            1|
+|             BATTERY|      W WEST END AVE|            1|
+|             ASSAULT|         N LOTUS AVE|            1|
+|  DECEPTIVE PRACTICE|      W MONTROSE AVE|            1|
+|            BURGLARY|        S RACINE AVE|            1|
+| MOTOR VEHICLE THEFT|      N ST LOUIS AVE|            1|
+|           NARCOTICS|        N CICERO AVE|            1|
+|             ROBBERY|           W 71ST ST|            1|
+|       OTHER OFFENSE|      S KINGSTON AVE|            1|
+|   WEAPONS VIOLATION|        S PAULINA ST|            1|
+|             BATTERY|           W 74TH ST|            1|
+|               THEFT|        N HAMLIN AVE|            1|
+| MOTOR VEHICLE THEFT|       N KILDARE AVE|            1|
+|     CRIMINAL DAMAGE|           W 82ND ST|            1|
+|     CRIMINAL DAMAGE|      S MACKINAW AVE|            1|
+|     CRIMINAL DAMAGE|        N ORIOLE AVE|            1|
+|  DECEPTIVE PRACTICE|            W ELM ST|            1|
+|           NARCOTICS|       S WESTERN AVE|            1|
+|     CRIMINAL DAMAGE|    S WINCHESTER AVE|            1|
+|           NARCOTICS|       N LATROBE AVE|            1|
+|             BATTERY|       W HARRISON ST|            1|
+|               THEFT|      N MICHIGAN AVE|            1|
+|     CRIMINAL DAMAGE|       S MERRILL AVE|            1|
+|             ASSAULT|       S EMERALD AVE|            1|
+| MOTOR VEHICLE THEFT|     W ARTHINGTON ST|            1|
+|     CRIMINAL DAMAGE|     S CHAMPLAIN AVE|            1|
+|            BURGLARY|           W 69TH ST|            1|
+|     CRIMINAL DAMAGE|       N LA SALLE ST|            1|
+|               THEFT|          N BROADWAY|            1|
+|             ROBBERY|          E 119TH ST|            1|
+|           NARCOTICS|        S PAULINA ST|            1|
+|     CRIMINAL DAMAGE|          S AVENUE H|            1|
+|            BURGLARY|  S STONY ISLAND AVE|            1|
+|             BATTERY|      S TRUMBULL AVE|            1|
+|   WEAPONS VIOLATION|          W ADAMS ST|            1|
+|            BURGLARY|       N WOLCOTT AVE|            1|
+|            BURGLARY|       W NEWPORT AVE|            1|
+|               THEFT|      N ASHLAND BLVD|            1|
+|     CRIMINAL DAMAGE|       S HARDING AVE|            1|
+|               THEFT|       N KENMORE AVE|            1|
+|             ASSAULT|      S KILBOURN AVE|            1|
+|     CRIMINAL DAMAGE|      W CORNELIA AVE|            1|
+|               THEFT|        S ARCHER AVE|            1|
+|               THEFT|      N NORMANDY AVE|            1|
+|            BURGLARY|         W ESTES AVE|            1|
+|   CRIMINAL TRESPASS|           E LAKE ST|            1|
+|             ROBBERY|      W AUGUSTA BLVD|            1|
+|     CRIMINAL DAMAGE|           W 21ST PL|            1|
+|               THEFT|     W CONGRESS PKWY|            1|
+|               THEFT|      S ST LOUIS AVE|            1|
+|               THEFT|     S WASHTENAW AVE|            1|
+|             BATTERY|          E 111TH ST|            1|
+|  DECEPTIVE PRACTICE|      W VAN BUREN ST|            1|
+|       OTHER OFFENSE|            S MAY ST|            1|
+|       OTHER OFFENSE|        S VERNON AVE|            1|
+|             BATTERY|      W ROOSEVELT RD|            1|
+|             BATTERY|        S PULASKI RD|            1|
+|             ROBBERY|S DR MARTIN LUTHE...|            1|
+|            BURGLARY|           W 31ST ST|            1|
+|           NARCOTICS|    S CALIFORNIA AVE|            1|
+|   CRIMINAL TRESPASS|      N CLYBOURN AVE|            1|
+|             ROBBERY|       S PRAIRIE AVE|            1|
+|  DECEPTIVE PRACTICE|      W LAWRENCE AVE|            1|
+|       OTHER OFFENSE|        S KENTON AVE|            1|
+|   WEAPONS VIOLATION|         S DAMEN AVE|            1|
+| MOTOR VEHICLE THEFT|      S EDBROOKE AVE|            1|
+|             ASSAULT|          E 133RD ST|            1|
+|             BATTERY|       N KEDZIE BLVD|            1|
+|               THEFT|     W WASHINGTON ST|            1|
+|               THEFT|      N AVONDALE AVE|            1|
+| MOTOR VEHICLE THEFT|     S FAIRFIELD AVE|            1|
+| MOTOR VEHICLE THEFT|       W CHICAGO AVE|            1|
+|             BATTERY|      N GLENWOOD AVE|            1|
+|   CRIMINAL TRESPASS|       W OAKDALE AVE|            1|
+|             BATTERY|           E 69TH ST|            1|
+|             BATTERY|       W CHICAGO AVE|            1|
+|OFFENSE INVOLVING...|        N SEELEY AVE|            1|
+|            BURGLARY|        S JUSTINE ST|            1|
+|            BURGLARY|      S CARPENTER ST|            1|
+|           NARCOTICS|      S KINGSTON AVE|            1|
+|     CRIMINAL DAMAGE|        W ADDISON ST|            1|
+|             BATTERY|           E ERIE ST|            1|
+|               THEFT|S DR MARTIN LUTHE...|            1|
+|  DECEPTIVE PRACTICE|       W LAKESIDE PL|            1|
+| MOTOR VEHICLE THEFT|         S DAMEN AVE|            1|
+|     CRIMINAL DAMAGE|        S TALMAN AVE|            1|
+|               THEFT|    N MARSHFIELD AVE|            1|
+|               THEFT|      S CARPENTER ST|            1|
+|             ROBBERY|         S PEORIA ST|            1|
+|             ROBBERY|       S ASHLAND AVE|            1|
+|   WEAPONS VIOLATION|      S CAMPBELL AVE|            1|
+|            BURGLARY|           W 76TH ST|            1|
+|               THEFT|       S HARDING AVE|            1|
+|  DECEPTIVE PRACTICE|      S CARPENTER ST|            1|
+|            BURGLARY|        S SAWYER AVE|            1|
+|             BATTERY|       S HARVARD AVE|            1|
+|       OTHER OFFENSE|      S ESCANABA AVE|            1|
+|            BURGLARY|           W 47TH ST|            1|
+|       OTHER OFFENSE|      W WEST END AVE|            1|
+|     CRIMINAL DAMAGE|        N BERNARD ST|            1|
+|             BATTERY|        S COLFAX AVE|            1|
+|               THEFT|       S PLYMOUTH CT|            1|
+|  DECEPTIVE PRACTICE|      E JACKSON BLVD|            1|
+|            BURGLARY|        N SAWYER AVE|            1|
+|             ASSAULT|     N MILWAUKEE AVE|            1|
+|     CRIMINAL DAMAGE|           E 41ST ST|            1|
+|            BURGLARY|       N ST JOHNS CT|            1|
+|             BATTERY|       S EMERALD AVE|            1|
+|             BATTERY|         N DAMEN AVE|            1|
++--------------------+--------------------+-------------+

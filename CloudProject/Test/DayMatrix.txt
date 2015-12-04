@@ -1,0 +1,23 @@
++--------------------+---------+-----------+
+|           crimetype|      day|countPerDay|
++--------------------+---------+-----------+
+|               THEFT|Wednesday|        113|
+|             BATTERY|Wednesday|         88|
+|     CRIMINAL DAMAGE|Wednesday|         70|
+|           NARCOTICS|Wednesday|         39|
+|            BURGLARY|Wednesday|         35|
+|       OTHER OFFENSE|Wednesday|         32|
+|             ASSAULT|Wednesday|         29|
+|             ROBBERY|Wednesday|         22|
+| MOTOR VEHICLE THEFT|Wednesday|         21|
+|  DECEPTIVE PRACTICE|Wednesday|         17|
+|   WEAPONS VIOLATION|Wednesday|         12|
+|   CRIMINAL TRESPASS|Wednesday|          9|
+| CRIM SEXUAL ASSAULT|Wednesday|          3|
+|OFFENSE INVOLVING...|Wednesday|          3|
+|PUBLIC PEACE VIOL...|Wednesday|          2|
+|INTERFERENCE WITH...|Wednesday|          2|
+|    PUBLIC INDECENCY|Wednesday|          1|
+|               ARSON|Wednesday|          1|
+|            HOMICIDE|Wednesday|          1|
++--------------------+---------+-----------+
