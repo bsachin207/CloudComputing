@@ -18,6 +18,11 @@ if __name__ == "__main__":
         print >> sys.stderr, "Usage: linreg <datafile>"
         exit(-1)
         
+        
+def barplot(d):
+    plt.bar(range(1,len(d)+1), list(d.values()), align='center')
+    plt.xticks(range(1,len(d)+1),list(d))
+    plt.show()     
 
 sc = SparkContext(appName="NaiveBayes")
 S_ALPHA = 1
@@ -28,9 +33,7 @@ header = inputCrimeCSV.first()
 inputCrimeCSV = inputCrimeCSV.filter(lambda x:x !=header)
 #inputCSV,excludecsv=inputCrimeCSV.randomSplit([0.999,0.001])
 
-inputCSV = inputCrimeCSV.take(500)
-
-
+inputCSV = inputCrimeCSV.take(5000)
 
 #inputCrimeCSV=inputCrimeCSV.takeSample(False, 50000)
 #crimeData = inputCrimeCSV.map(lambda line: (line.split(',')))
@@ -86,7 +89,7 @@ for index in range(len(CrimeTypes)):
   
     
 #Extracting statistics of crimes  
-crimeCounts=sqlContext.sql("SELECT crimetype,count(*) as crimeCount FROM chicagocrimedata GROUP BY crimetype").collect()
+crimeCounts=sqlContext.sql("SELECT crimetype,count(*) as crimeCount FROM chicagocrimedata GROUP BY crimetype order by crimeCount").collect()
 countByCrimeType = {}
 for index in range(len(crimeCounts)):
     countByCrimeType[crimeCounts[index].crimetype] = crimeCounts[index].crimeCount
@@ -99,12 +102,27 @@ locationsMatrix.registerTempTable("LocationMatrix")
 timeMatrix.registerTempTable("TimeMatrix")
 dayMatrix.registerTempTable("DayMatrix")
 #crimeCounts.registerTempTable("CrimeCounts")
+test = dict.fromkeys(allCrimeTypes,0)
+for crime in countByCrimeType:
+    test[crime] = sqlContext.sql("SELECT timeslot,countPerTime FROM TimeMatrix WHERE crimetype = '"+crime+"' order by timeslot").collect()
+    #test1 = sqlContext.sql("SELECT timeslot,countPerTime FROM TimeMatrix WHERE crimetype = 'BATTERY' order by timeslot").collect()
 
-#test = sqlContext.sql("SELECT * FROM TimeMatrix WHERE timeslot = 3")
+#print [test['THEFT'][x].timeslot for x in range(len(test['THEFT']))]
+#print [test[x].countPerTime for x in range(len(test))]
+notes = list()
+for crime in countByCrimeType:
+    if (len(test[crime])==8):
+        plt.plot(range(1,9),[test[crime][x].countPerTime for x in range(len(test[crime]))])
+        notes.append(crime)
+
+plt.legend(np.asanyarray(notes), loc='upper left')
+#plt.plot([test[x].timeslot for x in range(len(test))],[test1[x].countPerTime for x in range(len(test1))])
+
+plt.show()
 #test1 = sqlContext.sql("SELECT COUNT(DISTINCT(crimetype)) from TimeMatrix WHERE timeslot = 3")
 #dayMatrix.show(500)
 #dayMatrix.show(500)
-
+'''
 userlocation = "S WABASH AVE"
 usertimeslot = 1     #For Battery
 userday = "Wednesday"
@@ -131,13 +149,7 @@ print dict(loc_nOfCrime)
 
 
 
-DayOfWeekOfCall = range(1,len(loc_nOfCrime)+1)
-DispatchesOnThisWeekday = list(loc_nOfCrime.values())
 
-LABELS = list(loc_nOfCrime)
-
-plt.bar(DayOfWeekOfCall, DispatchesOnThisWeekday, align='center')
-plt.xticks(DayOfWeekOfCall, LABELS)
 
 
 probabilities = dict.fromkeys(allCrimeTypes,1)
@@ -145,17 +157,21 @@ for crime in loc_nOfCrime:
     locationPrbability = math.log((loc_nOfCrime[crime]*(countByCrimeType[crime]/float(TOTALCRIMES)))/float(locationVocabulary+S_ALPHA*countByCrimeType[crime]))
     timeProbability = math.log(time_nOfCrime[crime]/float(timeVocabulary+S_ALPHA*countByCrimeType[crime]))
     dayProbability = math.log(day_nOfCrime[crime]/float(dayVocabulary+S_ALPHA*countByCrimeType[crime]))
-    probabilities[crime] = locationPrbability + timeProbability + dayProbability
+    probabilities[crime] = locationPrbability + timeProbability + dayProbability+10
     
 sorted_x = dict(sorted(probabilities.items(), key=operator.itemgetter(1),reverse=True)[:3])
 
-print sorted_x
-plt.bar(range(1,len(sorted_x)+1), list(sorted_x.values()), align='center')
-plt.xticks(range(1,len(sorted_x)+1),list(sorted_x))
-plt.show(block=False)
+
+barplot(sorted_x)
+
+
+plt.pie(countByCrimeType.values(),  labels=list(countByCrimeType),  autopct='%1.1f%%', shadow=True, startangle=140)
+plt.axis('equal')
+plt.show()
+
 
 #/float(timeVocabulary+countByCrimeType[temp_Loc[index].crimetype])) 
 #/float(dayVocabulary+countByCrimeType[temp_Loc[index].crimetype]))   
 
-
+'''
 sc.stop()    
