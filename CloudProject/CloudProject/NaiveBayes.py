@@ -5,52 +5,69 @@ from pyspark import SparkContext
 from datetime import date
 from pyspark.sql import SQLContext
 from pyspark.sql.types import *
-from calendar import week
-from chardet.test import count
+from compiler.syntax import check
+from numpy.oldnumeric.random_array import seed
+import operator
+import math
+import pylab as plt
+
 
 
 if __name__ == "__main__":
     if len(sys.argv) !=2:
         print >> sys.stderr, "Usage: linreg <datafile>"
         exit(-1)
-sc = SparkContext(appName="naivebayes")
+        
+
+sc = SparkContext(appName="NaiveBayes")
+S_ALPHA = 1
 sqlContext=SQLContext(sc)
 inputCrimeCSV = sc.textFile(sys.argv[1])
+
 header = inputCrimeCSV.first()
 inputCrimeCSV = inputCrimeCSV.filter(lambda x:x !=header)
+#inputCSV,excludecsv=inputCrimeCSV.randomSplit([0.999,0.001])
 
-schemaString="day timeslot block crimetype locationdescription latitude longitude"
+inputCSV = inputCrimeCSV.take(500)
 
 
-crimeData = inputCrimeCSV.map(lambda line: (line.split(',')))#spliting only y part
+
+#inputCrimeCSV=inputCrimeCSV.takeSample(False, 50000)
+#crimeData = inputCrimeCSV.map(lambda line: (line.split(',')))
+crimeData = (sc.parallelize(inputCSV)).map(lambda line: (line.split(',')))
+
 
 def date2dayofweek(f):
     f=f.split('/')
     g=f[0]+" "+f[1]+" "+f[2]
     day=datetime.datetime.strptime(g,'%m %d %Y').strftime('%A')
     return day
-#datetime.datetime.strptime(line[2].split(' ',1)[0].split('/'),'%m,%d,%y').strftime('%A')
+
 def timeslot(f):
     time24=datetime.datetime.strptime(f,'%I:%M:%S %p').strftime('%X')
     timesl=int(time24[0:2])/3
     timesl=timesl+1#divided time into 8 slots 
     return timesl
-    
+   
+schemaString="day timeslot block crimetype latitude longitude" 
 fields = [StructField(field_name, StringType(), True) for field_name in schemaString.split()]
 schema = StructType(fields)
 
-reformattedCrime=crimeData.map(lambda line: [date2dayofweek(line[2].split(' ',1)[0]),timeslot(line[2].split(' ',1)[1]),line[3].split(' ',1)[1],line[5],line[7],line[19],line[20]])
 
-#train_set, test_set = reformattedCrime.randomSplit([0.0001, 0.9999])
 
-train_set = reformattedCrime.take(500)
 
-schemaCrime = sqlContext.createDataFrame(train_set, schema)
+
+reformattedCrime=crimeData.map(lambda line: [date2dayofweek(line[1].split(' ',1)[0]),timeslot(line[1].split(' ',1)[1]),line[2].split(' ',1)[1],line[3],line[4],line[5]])
+
+
+schemaCrime = sqlContext.createDataFrame(reformattedCrime, ['day','timeslot','block','crimetype','latitude','longitude'])
 schemaCrime.registerTempTable("chicagocrimedata")
-
+schemaCrime.cache()
 locationVocabulary = sqlContext.sql("SELECT count(distinct(block)) from chicagocrimedata").collect()[0][0]
 timeVocabulary = sqlContext.sql("SELECT count(distinct(timeslot)) from chicagocrimedata").collect()[0][0]
 dayVocabulary = sqlContext.sql("SELECT count(distinct(day)) from chicagocrimedata").collect()[0][0]
+TOTALCRIMES = sqlContext.sql("SELECT count(distinct(day)) from chicagocrimedata").collect()[0][0]
+#TOTALCRIMES = reformattedCrime.count() This takes too long. Screen shot 2nd 
 
 
 locationsMatrix=sqlContext.sql("SELECT crimetype,block,count(*) AS countPerBlock FROM chicagocrimedata group by crimetype,block order by countPerBlock desc")
@@ -61,11 +78,12 @@ dayMatrix=sqlContext.sql("SELECT crimetype,day,count(*) AS countPerDay FROM chic
 
 
 #Extract all classes. Here, distinct crime types 
-CrimeTypes = sqlContext.sql("SELECT distinct(crimetype) AS crimetypes FROM chicagocrimedata").collect()
-
+CrimeTypes = sqlContext.sql("SELECT distinct(crimetype) AS crimetypes FROM chicagocrimedata order by crimetypes").collect()
 allCrimeTypes = list()
 for index in range(len(CrimeTypes)):
     allCrimeTypes.append(CrimeTypes[index][0])
+    
+  
     
 #Extracting statistics of crimes  
 crimeCounts=sqlContext.sql("SELECT crimetype,count(*) as crimeCount FROM chicagocrimedata GROUP BY crimetype").collect()
@@ -73,74 +91,71 @@ countByCrimeType = {}
 for index in range(len(crimeCounts)):
     countByCrimeType[crimeCounts[index].crimetype] = crimeCounts[index].crimeCount
 
-print countByCrimeType.items()
+#print countByCrimeType.items()
            
-'''
+
 #Registering DataFrames as a table for program efficiency.
 locationsMatrix.registerTempTable("LocationMatrix")
 timeMatrix.registerTempTable("TimeMatrix")
 dayMatrix.registerTempTable("DayMatrix")
 #crimeCounts.registerTempTable("CrimeCounts")
 
+#test = sqlContext.sql("SELECT * FROM TimeMatrix WHERE timeslot = 3")
+#test1 = sqlContext.sql("SELECT COUNT(DISTINCT(crimetype)) from TimeMatrix WHERE timeslot = 3")
+#dayMatrix.show(500)
+#dayMatrix.show(500)
+
+userlocation = "S WABASH AVE"
+usertimeslot = 1     #For Battery
+userday = "Wednesday"
+
+temp_Loc = sqlContext.sql("SELECT crimetype, countPerBlock FROM LocationMatrix WHERE block='"+ userlocation+ "' order by crimetype").collect()
+temp_time = sqlContext.sql("SELECT crimetype, countPerTime FROM TimeMatrix WHERE timeslot="+str(usertimeslot)+" order by crimetype").collect()
+temp_day =sqlContext.sql("SELECT crimetype, countPerDay FROM DayMatrix WHERE day='"+ userday+ "' order by crimetype").collect()
+
+
+loc_nOfCrime = dict.fromkeys(allCrimeTypes,S_ALPHA)
+time_nOfCrime = dict.fromkeys(allCrimeTypes,S_ALPHA)
+day_nOfCrime = dict.fromkeys(allCrimeTypes,S_ALPHA)
 
 
 
+for index in range(len(temp_Loc)):
+    loc_nOfCrime[temp_Loc[index].crimetype] = loc_nOfCrime[temp_Loc[index].crimetype] + temp_Loc[index].countPerBlock
+for index in range(len(temp_time)):    
+    time_nOfCrime[temp_time[index].crimetype] = time_nOfCrime[temp_time[index].crimetype]+temp_time[index].countPerTime
+for index in range(len(temp_day)):
+    day_nOfCrime[temp_day[index].crimetype] = day_nOfCrime[temp_day[index].crimetype]+temp_day[index].countPerDay
 
-
-#sqlContext.sql("UPDATE TABLE LocationMatrix SET block = 'N STATE ST' WHERE crimetype='THEFT and count=4")
-#testing = sqlContext.sql("SELECT block, count(distinct(crimetype)) AS count FROM LocationMatrix group by crimetype,block order by count desc")
-
-#print testing.show(100)
-
-userlocation = "N STATE ST"
-usertimeslot = intern('3')
-userday = "Friday"
-
-Loc_nOfCrime = {}
-time_nOfCrime = {}
-day_nOfCrime = {}
+print dict(loc_nOfCrime)
 
 
 
-for index in range(len(allCrimeTypes)):
-    temp = sqlContext.sql("SELECT countPerBlock FROM LocationMatrix WHERE block='"+ userlocation+ "' and crimetype='"+allCrimeTypes[index]+"'").collect()
-    if (not temp):
-        Loc_nOfCrime[allCrimeTypes[index]] = 0
-    else:
-        Loc_nOfCrime[allCrimeTypes[index]] = temp[0][0]
- 
-#Loc_nOfCrime[allCrimeTypes[index]] = temp[0].Pcount
+DayOfWeekOfCall = range(1,len(loc_nOfCrime)+1)
+DispatchesOnThisWeekday = list(loc_nOfCrime.values())
 
-for index in range(len(allCrimeTypes)):
-    temp = sqlContext.sql("SELECT countPerTime FROM TimeMatrix WHERE timeslot="+ usertimeslot+ " and crimetype='"+allCrimeTypes[index]+"'").collect()
-    if (not temp):
-        time_nOfCrime[allCrimeTypes[index]] = 0
-    else:
-        time_nOfCrime[allCrimeTypes[index]] = temp[0][0]
-        
-        
-for index in range(len(allCrimeTypes)):
-    temp = sqlContext.sql("SELECT countPerDay FROM DayMatrix WHERE day='"+ userday+ "' and crimetype='"+allCrimeTypes[index]+"'").collect()
-    if (not temp):
-        day_nOfCrime[allCrimeTypes[index]] = 0
-    else:
-        day_nOfCrime[allCrimeTypes[index]] = temp[0][0]
-        
+LABELS = list(loc_nOfCrime)
 
-print Loc_nOfCrime.items()
-print time_nOfCrime.items()
-print day_nOfCrime.items()
+plt.bar(DayOfWeekOfCall, DispatchesOnThisWeekday, align='center')
+plt.xticks(DayOfWeekOfCall, LABELS)
 
 
-#print testing.show(100)
-#print timeMatrix.filter(timeMatrix.crimetype == 'THEFT' & timeMatrix.timeslot==3).show(100)
+probabilities = dict.fromkeys(allCrimeTypes,1)
+for crime in loc_nOfCrime:
+    locationPrbability = math.log((loc_nOfCrime[crime]*(countByCrimeType[crime]/float(TOTALCRIMES)))/float(locationVocabulary+S_ALPHA*countByCrimeType[crime]))
+    timeProbability = math.log(time_nOfCrime[crime]/float(timeVocabulary+S_ALPHA*countByCrimeType[crime]))
+    dayProbability = math.log(day_nOfCrime[crime]/float(dayVocabulary+S_ALPHA*countByCrimeType[crime]))
+    probabilities[crime] = locationPrbability + timeProbability + dayProbability
+    
+sorted_x = dict(sorted(probabilities.items(), key=operator.itemgetter(1),reverse=True)[:3])
 
+print sorted_x
+plt.bar(range(1,len(sorted_x)+1), list(sorted_x.values()), align='center')
+plt.xticks(range(1,len(sorted_x)+1),list(sorted_x))
+plt.show(block=False)
 
+#/float(timeVocabulary+countByCrimeType[temp_Loc[index].crimetype])) 
+#/float(dayVocabulary+countByCrimeType[temp_Loc[index].crimetype]))   
 
-
-#print locationVocabulary
-#print locationsMatrix.show(100)
-
-'''
 
 sc.stop()    
