@@ -1,3 +1,9 @@
+#Names: Sachin Badgujar, Siva Krishna
+#Course Project: Cloud Computing for Data Analysis.
+#Project Name: Crime Forecasting
+
+
+
 import sys
 import numpy as np
 import datetime
@@ -9,7 +15,8 @@ from compiler.syntax import check
 from numpy.oldnumeric.random_array import seed
 import operator
 import math
-import pylab as plt
+import csv
+
 
 
 
@@ -18,11 +25,6 @@ if __name__ == "__main__":
         print len(sys.argv)
         print >> sys.stderr, "Usage: NaiveBayes.py <datafile> <'location,timeslot,day'>"
         exit(-1)
-               
-def barplot(d):
-    plt.bar(range(1,len(d)+1), list(d.values()), align='center')
-    plt.xticks(range(1,len(d)+1),list(d))
-    plt.show()     
 
 #setting up spark Context.
 sc = SparkContext(appName="NaiveBayes")
@@ -33,22 +35,39 @@ sqlContext=SQLContext(sc)
 
 #Reading the Input CSV file and user inputs.
 inputCrimeCSV = sc.textFile(sys.argv[1])
+
+
+userlocation = list()
+usertimeslot = list()
+userday = list()
+f = open(sys.argv[2])
+csv_f = csv.reader(f)
+for row in csv_f:
+    print row[0]
+    userlocation.append(row[0])
+    usertimeslot.append(row[1])
+    userday.append(row[2])
+  
+print userlocation
+print usertimeslot
+print userday
+'''
 userInput = sys.argv[2].split(',')
 
 userlocation = userInput[0]
 usertimeslot = userInput[1]
 userday = userInput[2]
-
+'''
 header = inputCrimeCSV.first()
 inputCrimeCSV = inputCrimeCSV.filter(lambda x:x !=header)
 
 #Splitting the input file
-inputCSV,excludecsv=inputCrimeCSV.randomSplit([0.999,0.001])
+#inputCSV,excludecsv=inputCrimeCSV.randomSplit([0.001,0.999])
 
-#inputCSV = inputCrimeCSV.take(500)
+inputCSV = inputCrimeCSV.take(5000)
 
 
-crimeData = inputCSV.map(lambda line: (line.split(',')))
+#crimeData = inputCSV.map(lambda line: (line.split(',')))
 crimeData = (sc.parallelize(inputCSV)).map(lambda line: (line.split(',')))
 
 # Finding out the Day of the week From the Date
@@ -108,7 +127,9 @@ sqlContext.uncacheTable("chicagocrimedata")
 locationsMatrix.registerTempTable("LocationMatrix")
 timeMatrix.registerTempTable("TimeMatrix")
 dayMatrix.registerTempTable("DayMatrix")
-#sqlContext.cacheTable("TimeMatrix")
+sqlContext.cacheTable("LocationMatrix")
+sqlContext.cacheTable("TimeMatrix")
+sqlContext.cacheTable("DayMatrix")
 
 '''
 userlocation = "S WABASH AVE"
@@ -116,46 +137,52 @@ usertimeslot = 1     #For Battery
 userday = "Wednesday"
 '''
 
+#Opening file given by user
+f = open('Predictions.txt', 'w')
 
-temp_Loc = sqlContext.sql("SELECT crimetype, countPerBlock FROM LocationMatrix WHERE block='"+ userlocation+ "' order by crimetype").collect()
-temp_time = sqlContext.sql("SELECT crimetype, countPerTime FROM TimeMatrix WHERE timeslot="+str(usertimeslot)+" order by crimetype").collect()
-temp_day =sqlContext.sql("SELECT crimetype, countPerDay FROM DayMatrix WHERE day='"+ userday+ "' order by crimetype").collect()
-
-loc_nOfCrime = dict.fromkeys(allCrimeTypes,S_ALPHA)
-time_nOfCrime = dict.fromkeys(allCrimeTypes,S_ALPHA)
-day_nOfCrime = dict.fromkeys(allCrimeTypes,S_ALPHA)
-
-#Pre-Calculation for Posterior Probability
-for index in range(len(temp_Loc)):
-    loc_nOfCrime[temp_Loc[index].crimetype] = loc_nOfCrime[temp_Loc[index].crimetype] + temp_Loc[index].countPerBlock
-for index in range(len(temp_time)):    
-    time_nOfCrime[temp_time[index].crimetype] = time_nOfCrime[temp_time[index].crimetype]+temp_time[index].countPerTime
-for index in range(len(temp_day)):
-    day_nOfCrime[temp_day[index].crimetype] = day_nOfCrime[temp_day[index].crimetype]+temp_day[index].countPerDay
-
-#Creating Dictionary for Probabilities of all crime types.
-probabilities = dict.fromkeys(allCrimeTypes,1)
-for crime in loc_nOfCrime:
-    locationPrbability = math.log((loc_nOfCrime[crime]*(countByCrimeType[crime]/float(TOTALCRIMES)))/float(locationVocabulary+S_ALPHA*countByCrimeType[crime]))
-    timeProbability = math.log(time_nOfCrime[crime]/float(timeVocabulary+S_ALPHA*countByCrimeType[crime]))
-    dayProbability = math.log(day_nOfCrime[crime]/float(dayVocabulary+S_ALPHA*countByCrimeType[crime]))
-    probabilities[crime] = locationPrbability + timeProbability + dayProbability+10
-
-#Top 3 Crimes with highest probabilities are shown.    
-sorted_x = dict(sorted(probabilities.items(), key=operator.itemgetter(1),reverse=True)[:3])
-
-#Showing the result to the user.
-print "You may encounter below 3 crimes: "
-print list(sorted_x)[0]
-print list(sorted_x)[1]
-print list(sorted_x)[2]
-
-
-'''
-barplot(sorted_x)
-plt.pie(countByCrimeType.values(),  labels=list(countByCrimeType),  autopct='%1.1f%%', shadow=True, startangle=140)
-plt.axis('equal')
-plt.show()
-'''
-
+for i in range(len(userlocation)):
+    temp_Loc = sqlContext.sql("SELECT crimetype, countPerBlock FROM LocationMatrix WHERE block='"+ userlocation[i]+ "' order by crimetype").collect()
+    temp_time = sqlContext.sql("SELECT crimetype, countPerTime FROM TimeMatrix WHERE timeslot="+str(usertimeslot[i])+" order by crimetype").collect()
+    temp_day =sqlContext.sql("SELECT crimetype, countPerDay FROM DayMatrix WHERE day='"+ userday[i]+ "' order by crimetype").collect()
+    
+    loc_nOfCrime = dict.fromkeys(allCrimeTypes,S_ALPHA)
+    time_nOfCrime = dict.fromkeys(allCrimeTypes,S_ALPHA)
+    day_nOfCrime = dict.fromkeys(allCrimeTypes,S_ALPHA)
+    
+    #Pre-Calculation for Posterior Probability
+    for index in range(len(temp_Loc)):
+        loc_nOfCrime[temp_Loc[index].crimetype] = loc_nOfCrime[temp_Loc[index].crimetype] + temp_Loc[index].countPerBlock
+    for index in range(len(temp_time)):    
+        time_nOfCrime[temp_time[index].crimetype] = time_nOfCrime[temp_time[index].crimetype]+temp_time[index].countPerTime
+    for index in range(len(temp_day)):
+        day_nOfCrime[temp_day[index].crimetype] = day_nOfCrime[temp_day[index].crimetype]+temp_day[index].countPerDay
+    
+    #Creating Dictionary for Probabilities of all crime types.
+    probabilities = dict.fromkeys(allCrimeTypes,1)
+    for crime in loc_nOfCrime:
+        locationPrbability = math.log((loc_nOfCrime[crime]*(countByCrimeType[crime]/float(TOTALCRIMES)))/float(locationVocabulary+S_ALPHA*countByCrimeType[crime]))
+        timeProbability = math.log(time_nOfCrime[crime]/float(timeVocabulary+S_ALPHA*countByCrimeType[crime]))
+        dayProbability = math.log(day_nOfCrime[crime]/float(dayVocabulary+S_ALPHA*countByCrimeType[crime]))
+        probabilities[crime] = locationPrbability + timeProbability + dayProbability+10
+    
+    #Top 3 Crimes with highest probabilities are shown.    
+    sorted_x = dict(sorted(probabilities.items(), key=operator.itemgetter(1),reverse=True)[:3])
+    
+    #Showing the result to the user.
+    slotConv = int(usertimeslot[i])
+    endTime = slotConv*3
+    print >>f, "You may encounter below 3 crimes at : '" + userlocation[i] + "' between time "+str(endTime - 3)+":00 to "+str(endTime)+":00 On "+userday[i]
+    print >> f,list(sorted_x)[0]
+    print >> f,list(sorted_x)[1]
+    print >>f, list(sorted_x)[2]
+    print >>f, "\n"
+    
+    
+    '''
+    barplot(sorted_x)
+    plt.pie(countByCrimeType.values(),  labels=list(countByCrimeType),  autopct='%1.1f%%', shadow=True, startangle=140)
+    plt.axis('equal')
+    plt.show()
+    '''
+f.close()
 sc.stop()    
